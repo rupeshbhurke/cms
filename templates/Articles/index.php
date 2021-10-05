@@ -1,4 +1,4 @@
-!-- File: templates/Articles/index.php  (delete links added) -->
+<!-- File: templates/Articles/index.php  (delete links added) -->
 
 <h1>Articles</h1>
 <p><?= $this->Html->link("Add Article", ['action' => 'add']) ?></p>
