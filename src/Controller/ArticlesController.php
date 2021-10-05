@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use PHPUnit\Framework\Constraint\IsEmpty;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ArticlesController extends AppController
 {
@@ -70,7 +73,6 @@ class ArticlesController extends AppController
 
         // Set tags to the view context
         $this->set('tags', $tags);
-
         $this->set('article', $article);
     }
 
@@ -84,4 +86,43 @@ class ArticlesController extends AppController
             return $this->redirect(['action' => 'index']);
         }
     }
+
+    public function tags()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $tags = $this->request->getParam('pass');
+
+        // if (IsEmpty($tags)) {
+        //     $this->Flash->error(__('Search query did not have any tags.'));
+        //     return $this->redirect(['action' => 'index']);
+        // }// else {
+
+            // Use the ArticlesTable to find tagged articles.
+            $articles = $this->Articles->find('tagged', [
+                'tags' => $tags
+            ])->all();
+        //}
+        // Pass variables into the view template context.
+        $this->set([
+            'articles' => $articles,
+            'tags' => $tags
+        ]);
+    }
+
+    //// Above tags() actions can be defined as follows too.
+    // public function tags(...$tags)
+    // {
+    //     // Use the ArticlesTable to find tagged articles.
+    //     $articles = $this->Articles->find('tagged', [
+    //             'tags' => $tags
+    //         ])
+    //         ->all();
+
+    //     // Pass variables into the view template context.
+    //     $this->set([
+    //         'articles' => $articles,
+    //         'tags' => $tags
+    //     ]);
+    // }    
 }
