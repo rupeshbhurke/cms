@@ -53,6 +53,7 @@ class AppController extends Controller
         //$this->loadComponent('FormProtection');
         // To check authentication result and lock your site
         $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authorization.Authorization');
     }
 
     // We want all view and index pages accessible without logging in.
